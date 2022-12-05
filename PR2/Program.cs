@@ -14,14 +14,12 @@ namespace PR2
             Console.WriteLine($"Метод средней точки: {Midpoint(a, b, eps).Item1}\nИтераций: {Midpoint(a, b, eps).Item2}");
             Console.WriteLine($"Метод хорд: {Secant(a, b, eps).Item1}\nИтераций: {Secant(a, b, eps).Item2}");
             Console.WriteLine($"Метод Ньютона: {Newton(a, b, eps).Item1}\nИтераций: {Newton(a, b, eps).Item2}");
-            Console.WriteLine($"Метод кубической аппроксимации: {cubicApproximation(a, b, eps)}");
+            Console.WriteLine($"Метод кубической аппроксимации: {cubicApproximation(a, b, eps).Item1}\nИтераций: {cubicApproximation(a, b, eps).Item2}");
         }
 
         static double function(double x)
         {
             return Math.Pow(Math.Sin(x), 2) + Math.Pow(Math.E, x); //вар22
-            //return (1 / Math.Log(x, Math.E)) + Math.Pow(x, 2);
-            //return Math.Pow((x + 1), (x / 2)) + Math.Pow((10 - x), 2); //Функция из примера (для проверки)
         }
         static double functionDerivative(double x) //Производная функции
         {
@@ -77,58 +75,35 @@ namespace PR2
             }
             return (x[k], k);
         }
-        static double cubicApproximation(double a, double b, double eps)
+        static (double,int) cubicApproximation(double a, double b, double eps)
         {
-            //https://life-prog.ru/2_60886_algoritm-metoda-sredney-tochki.html
-            //https://studfile.net/preview/1467149/page:17/
-
-            double x0 = a;
-            double x1 = 0;
-            double h = a / 100;
-            double k = 0;
-            int count = 0;
+            //гайд: https://life-prog.ru/2_60886_algoritm-metoda-sredney-tochki.html
+            double pol = 0;
+            int k = 0;
+            double tmp = 0;
             while (true)
             {
-                if (functionDerivative(x0) > 0)
-                    x1 = x0 + Math.Pow(2, count) * h;
-                else
-                    x1 = x0 - Math.Pow(2, count) * h;
-                if (functionDerivative(x1) * functionDerivative(x0) > 0)
-                    break;             //точка min-ма функции пройдена
-                else
-                    x0 = x1;
-                count++;
-            }
-
-            if (functionDerivative(x0) > 0)
-            {
-                a = x0;
-                b = x1;
-            }
-            else
-            {
-                a = x1;
-                b = x0;
-            }
-
-            while (true)
-            {
-                double z = (3 * function(a) - function(b)) / (b - a) + functionDerivative(a) + functionDerivative(b);
+                k++;
+                //Шаг 1
+                double z = functionDerivative(a) + functionDerivative(b) - 3 * (function(b) - function(a)) / (b - a);
                 double w = Math.Sqrt(Math.Pow(z, 2) - functionDerivative(a) * functionDerivative(b));
-                double y = (z + w - functionDerivative(a)) / (functionDerivative(b) - functionDerivative(a) + 2 * w);
-
-                double polynom = a + y * (b - a);
-
-                if (functionDerivative(polynom) < 0)
-                    a = polynom;
-                else
-                    b = polynom;
-                if (Math.Abs(b - a) < eps)
+                double u = (w + z - functionDerivative(a)) / (2 * w - functionDerivative(a) + functionDerivative(b));
+                pol = a + u * (b - a);
+                
+                //Шаг 2
+                if (Math.Abs(tmp - functionDerivative(a) * functionDerivative(pol)) < eps)
                     break;
+                else
+                {
+                    //Шаг 3
+                    if ((functionDerivative(a) * functionDerivative(pol)) < 0)
+                        b = pol;
+                    else
+                        a = pol;
+                }
+                tmp = (functionDerivative(a) * functionDerivative(pol));                
             }
-            double x = (b + a) / 2;
-
-            return x;
+            return (pol,k);
         }
 
     }
