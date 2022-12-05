@@ -1,0 +1,16 @@
+C:\Users\Admin\source\repos\PR2\PR2\bin\Debug\net5.0\PR2.exe
+C:\Users\Admin\source\repos\PR2\PR2\bin\Debug\net5.0\PR2.deps.json
+C:\Users\Admin\source\repos\PR2\PR2\bin\Debug\net5.0\PR2.runtimeconfig.json
+C:\Users\Admin\source\repos\PR2\PR2\bin\Debug\net5.0\PR2.runtimeconfig.dev.json
+C:\Users\Admin\source\repos\PR2\PR2\bin\Debug\net5.0\PR2.dll
+C:\Users\Admin\source\repos\PR2\PR2\bin\Debug\net5.0\PR2.pdb
+C:\Users\Admin\source\repos\PR2\PR2\obj\Debug\net5.0\PR2.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\PR2\PR2\obj\Debug\net5.0\PR2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\PR2\PR2\obj\Debug\net5.0\PR2.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\PR2\PR2\obj\Debug\net5.0\PR2.AssemblyInfo.cs
+C:\Users\Admin\source\repos\PR2\PR2\obj\Debug\net5.0\PR2.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\PR2\PR2\obj\Debug\net5.0\PR2.dll
+C:\Users\Admin\source\repos\PR2\PR2\obj\Debug\net5.0\refint\PR2.dll
+C:\Users\Admin\source\repos\PR2\PR2\obj\Debug\net5.0\PR2.pdb
+C:\Users\Admin\source\repos\PR2\PR2\obj\Debug\net5.0\PR2.genruntimeconfig.cache
+C:\Users\Admin\source\repos\PR2\PR2\obj\Debug\net5.0\ref\PR2.dll
