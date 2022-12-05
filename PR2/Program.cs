@@ -82,88 +82,51 @@ namespace PR2
             //https://life-prog.ru/2_60886_algoritm-metoda-sredney-tochki.html
             //https://studfile.net/preview/1467149/page:17/
 
-
+            double x0 = a;
+            double x1 = 0;
+            double h = a / 100;
+            double k = 0;
+            int count = 0;
+            while (true)
             {
-                //double x0 = a;
-                //double x1 = 0;
-                //double h = a / 100;
-                //double k = 0;
-                //int count = 0;
-                //while (true)
-                //{
-                //    if (functionDerivative(x0) > 0)
-                //        x1 = x0 + Math.Pow(2, count) * h;
-                //    else
-                //        x1 = x0 - Math.Pow(2, count) * h;
-                //    if (functionDerivative(x1) * functionDerivative(x0) > 0)
-                //        break;             //точка min-ма функции пройдена
-                //    else
-                //        x0 = x1;
-                //    count++;
-                //}
-
-                //if (functionDerivative(x0) > 0)
-                //{
-                //    a = x0;
-                //    b = x1;
-                //}
-                //else
-                //{
-                //    a = x1;
-                //    b = x0;
-                //}
-
-                //while (true)
-                //{
-                //    double z = (3 * function(a) - function(b)) / (b - a) + functionDerivative(a) + functionDerivative(b);
-                //    double w = Math.Sqrt(Math.Pow(z, 2) - functionDerivative(a) * functionDerivative(b));
-                //    double y = (z + w - functionDerivative(a)) / (functionDerivative(b) - functionDerivative(a) + 2 * w);
-
-                //    double polynom = a + y * (b - a);
-
-                //    if (functionDerivative(polynom) < 0)
-                //        a = polynom;
-                //    else
-                //        b = polynom;
-                //    if (Math.Abs(b - a) < eps)
-                //        break;
-                //}
-                //double x = (b + a) / 2;
-            }
-            double x1 = a;
-            double x2 = b;
-
-            double x = 0;
-
-            double a1 = (function(x2)- function(x1))/(x2-x1);
-            double a2 = (function(x2) - function(x1)) / (Math.Pow((x2 - x1), 2)) - function(x1)/(x2-x1);
-            double a3 = (function(x2) + function(x1)) / (Math.Pow((x2 - x1), 2)) - (function(x2) - function(x1)) / (Math.Pow((x2 - x1), 3));
-
-            double H(double x)
-            {
-                return function(x1)+a1*(x-x1)+a2*(x-x1)*(x-x2)+a3*Math.Pow(x-x1,2)*(x-x2);
-            }
-
-            bool x1f1 = H(x1) == function(x1);
-            bool x2f2 = H(x2) == function(x2);
-
-            while (Math.Abs(b-a)>eps)
-            {
-                double z = functionDerivative(x1) + functionDerivative(x2) - 3 * (function(x2) - function(x1)) / (x2 - x1);
-                double w = Math.Sqrt(Math.Pow(z, 2) - functionDerivative(x1) * functionDerivative(x2));
-                double u = (w + z - functionDerivative(x1)) / (2 * w - functionDerivative(x1) + functionDerivative(x2));
-                x = x1 + u * (x2 - x1);
-                if (functionDerivative(x1) * functionDerivative(x) < 0)
-                {
-                    a = x1;
-                    b = x;
-                }
+                if (functionDerivative(x0) > 0)
+                    x1 = x0 + Math.Pow(2, count) * h;
                 else
-                {
-                    a = x;
-                    b = x2;
-                }
+                    x1 = x0 - Math.Pow(2, count) * h;
+                if (functionDerivative(x1) * functionDerivative(x0) > 0)
+                    break;             //точка min-ма функции пройдена
+                else
+                    x0 = x1;
+                count++;
             }
+
+            if (functionDerivative(x0) > 0)
+            {
+                a = x0;
+                b = x1;
+            }
+            else
+            {
+                a = x1;
+                b = x0;
+            }
+
+            while (true)
+            {
+                double z = (3 * function(a) - function(b)) / (b - a) + functionDerivative(a) + functionDerivative(b);
+                double w = Math.Sqrt(Math.Pow(z, 2) - functionDerivative(a) * functionDerivative(b));
+                double y = (z + w - functionDerivative(a)) / (functionDerivative(b) - functionDerivative(a) + 2 * w);
+
+                double polynom = a + y * (b - a);
+
+                if (functionDerivative(polynom) < 0)
+                    a = polynom;
+                else
+                    b = polynom;
+                if (Math.Abs(b - a) < eps)
+                    break;
+            }
+            double x = (b + a) / 2;
 
             return x;
         }
